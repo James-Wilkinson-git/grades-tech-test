@@ -8,6 +8,7 @@ import Home from "./Home/Home.tsx";
 import Results from "./Results/Results.tsx";
 import Courses from "./Courses/Courses.tsx";
 import NewStudents from "./Students/NewStudents.tsx";
+import NewCourses from "./Courses/NewCourses.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -20,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="results" element={<Results />} />
           <Route path="results/new" element={<Results />} />
           <Route path="courses" element={<Courses />} />
-          <Route path="courses/new" element={<Courses />} />
+          <Route path="courses/new" element={<NewCourses />} />
         </Route>
       </Routes>
     </BrowserRouter>
