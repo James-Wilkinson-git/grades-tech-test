@@ -56,7 +56,7 @@ export default function Students() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {students?.map((student, i) => {
+            {students?.map((student) => {
               return (
                 <TableRow
                   key={student.uuid}

@@ -36,7 +36,7 @@ export default function Courses() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {courses?.map((course, i) => {
+            {courses?.map((course) => {
               return (
                 <TableRow
                   key={course.uuid}
