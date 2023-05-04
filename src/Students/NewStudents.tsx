@@ -18,7 +18,9 @@ export default function NewStudents() {
   const [success, setSuccess] = useState(false);
 
   const handleNewStudent = (event: FormEvent) => {
+    //Stop the form from doing form stuff
     event.preventDefault();
+    //if any of our ref's didn't work exit the function
     if (
       firstNameInput.current === undefined ||
       familyNameInput.current === undefined ||
@@ -37,9 +39,9 @@ export default function NewStudents() {
       setOfAge(true);
     } else {
       setOfAge(false);
+      //If we already have students in local storage we want to get those and add to them
       const students = localStorage.getItem("Students") || "";
       let newStudents = [{}];
-      //If we already have students in local storage we want to get those and add to them
       if (students) {
         const parseStudents = JSON.parse(students);
         newStudents = [
@@ -70,6 +72,7 @@ export default function NewStudents() {
       firstNameInput.current.value = "";
       familyNameInput.current.value = "";
       emailInput.current.value = "";
+      //Show the success message
       setSuccess(true);
     }
   };

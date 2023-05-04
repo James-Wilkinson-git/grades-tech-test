@@ -1,11 +1,13 @@
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function NewCourses() {
+  const [success, setSuccess] = useState(false);
   const courseInput = useRef<HTMLInputElement>();
   const handleNewCourse = (event: FormEvent) => {
     event.preventDefault();
@@ -29,9 +31,12 @@ export default function NewCourses() {
       ];
     }
     localStorage.setItem("Courses", JSON.stringify(newCourses));
+    courseInput.current.value = "";
+    setSuccess(true);
   };
   return (
     <>
+      {success && <Alert severity="success">Course Submitted</Alert>}
       <Typography variant="h3">New Courses</Typography>
       <form onSubmit={handleNewCourse}>
         <Box sx={{ paddingTop: "20px" }}>
