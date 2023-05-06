@@ -9,6 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import { TStudent } from "../Students/Students";
+import { v4 as uuidv4 } from "uuid";
 
 export default function NewResults() {
   //Reused logic from courses and students
@@ -41,11 +42,17 @@ export default function NewResults() {
     ) {
       return;
     }
-    console.log(
-      courseSelect.current.value,
-      studentSelect.current.value,
-      gradeSelect.current.value
-    );
+    const localResults = localStorage.getItem("Results") || "[]";
+    const newResults = [];
+    const results = JSON.parse(localResults);
+    newResults.push(...results);
+    newResults.push({
+      uuid: uuidv4(),
+      course: courseSelect.current.value,
+      student: studentSelect.current.value,
+      grade: gradeSelect.current.value,
+    });
+    localStorage.setItem("Results", JSON.stringify(newResults));
   };
   return (
     <>
@@ -53,64 +60,58 @@ export default function NewResults() {
       <Divider />
       <form onSubmit={handleResultsSubmit}>
         <Box sx={{ paddingTop: "20px" }}>
-          <Box sx={{ width: 1 / 4, paddingTop: "20px" }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Course</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Course"
-                inputRef={courseSelect}
-                required
-              >
-                {courses?.map((course) => {
-                  return (
-                    <MenuItem value={course.courseName}>
-                      {course.courseName}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+          <Box sx={{ paddingTop: "20px" }}>
+            <InputLabel id="demo-simple-select-label">Course</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Course"
+              inputRef={courseSelect}
+              required
+            >
+              {courses?.map((course) => {
+                return (
+                  <MenuItem key={course.uuid} value={course.courseName}>
+                    {course.courseName}
+                  </MenuItem>
+                );
+              })}
+            </Select>
           </Box>
-          <Box sx={{ width: 1 / 4, paddingTop: "20px" }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Student</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Course"
-                inputRef={studentSelect}
-                required
-              >
-                {students?.map((student) => {
-                  return (
-                    <MenuItem value={student.firstName}>
-                      {student.firstName}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+          <Box sx={{ paddingTop: "20px" }}>
+            <InputLabel id="demo-simple-select-label2">Student</InputLabel>
+            <Select
+              labelId="demo-simple-select-label2"
+              id="demo-simple-select"
+              label="Course"
+              inputRef={studentSelect}
+              required
+            >
+              {students?.map((student) => {
+                return (
+                  <MenuItem key={student.uuid} value={student.firstName}>
+                    {student.firstName}
+                  </MenuItem>
+                );
+              })}
+            </Select>
           </Box>
-          <Box sx={{ width: 1 / 4, paddingTop: "20px" }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Grade</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Course"
-                inputRef={gradeSelect}
-                required
-              >
-                <MenuItem value="A">A</MenuItem>
-                <MenuItem value="B">B</MenuItem>
-                <MenuItem value="C">C</MenuItem>
-                <MenuItem value="D">D</MenuItem>
-                <MenuItem value="E">E</MenuItem>
-                <MenuItem value="F">F</MenuItem>
-              </Select>
-            </FormControl>
+          <Box sx={{ paddingTop: "20px" }}>
+            <InputLabel id="demo-simple-select-label3">Grade</InputLabel>
+            <Select
+              labelId="demo-simple-select-label3"
+              id="demo-simple-select"
+              label="Course"
+              inputRef={gradeSelect}
+              required
+            >
+              <MenuItem value="A">A</MenuItem>
+              <MenuItem value="B">B</MenuItem>
+              <MenuItem value="C">C</MenuItem>
+              <MenuItem value="D">D</MenuItem>
+              <MenuItem value="E">E</MenuItem>
+              <MenuItem value="F">F</MenuItem>
+            </Select>
           </Box>
           <Box sx={{ paddingTop: "20px" }}>
             <Button color="primary" variant="contained" type="submit">

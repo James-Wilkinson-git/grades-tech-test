@@ -22,7 +22,7 @@ export default function Students() {
   const [students, setStudents] = useState<TStudent[]>();
   //Get the students on load of the page from storage
   useEffect(() => {
-    const getStudents = localStorage.getItem("Students") || "";
+    const getStudents = localStorage.getItem("Students") || "[]";
     if (getStudents) {
       const parseStudents = JSON.parse(getStudents);
       setStudents(parseStudents);

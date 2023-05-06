@@ -40,7 +40,7 @@ export default function NewStudents() {
     } else {
       setOfAge(false);
       //If we already have students in local storage we want to get those and add to them
-      const students = localStorage.getItem("Students") || "";
+      const students = localStorage.getItem("Students") || "[]";
       const newStudents = [];
       const parseStudents = JSON.parse(students);
       newStudents.push(...parseStudents);

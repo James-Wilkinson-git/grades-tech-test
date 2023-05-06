@@ -20,7 +20,7 @@ export default function Courses() {
   const [courses, setCourses] = useState<TCourse[]>();
   //On load get the courses from storage
   useEffect(() => {
-    const storedCourses = localStorage.getItem("Courses");
+    const storedCourses = localStorage.getItem("Courses") || "[]";
     if (storedCourses) {
       const parsedCourses = JSON.parse(storedCourses);
       setCourses(parsedCourses);
