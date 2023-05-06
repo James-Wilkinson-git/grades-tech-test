@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 import Course from "./Course";
-
+//In this version we use prop passing to showcase listing and deleting elements
 export type TCourse = {
   uuid: string;
   courseName: string;
@@ -16,7 +16,9 @@ export type TCourse = {
 };
 
 export default function Courses() {
+  //Give ourselves state of the courses
   const [courses, setCourses] = useState<TCourse[]>();
+  //On load get the courses from storage
   useEffect(() => {
     const storedCourses = localStorage.getItem("Courses");
     if (storedCourses) {
@@ -24,9 +26,17 @@ export default function Courses() {
       setCourses(parsedCourses);
     }
   }, []);
+  //Delete courses we clicked on
   const handleCourseClick = (uuid: string) => {
-    console.log(uuid);
+    const newCourses = courses?.filter((course) => course.uuid !== uuid);
+    setCourses(newCourses);
   };
+  // Once courses is changed save it back to local storage
+  useEffect(() => {
+    if (courses !== undefined) {
+      localStorage.setItem("Courses", JSON.stringify(courses));
+    }
+  }, [courses]);
   return (
     <>
       <Typography variant="h3">Courses</Typography>
