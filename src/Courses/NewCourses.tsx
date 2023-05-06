@@ -15,21 +15,10 @@ export default function NewCourses() {
       return;
     }
     const currentCourses = localStorage.getItem("Courses") || "";
-    let newCourses;
-    if (currentCourses) {
-      const parseCurrentCourses = JSON.parse(currentCourses);
-      newCourses = [
-        ...parseCurrentCourses,
-        { uuid: uuidv4(), courseName: courseInput.current.value },
-      ];
-    } else {
-      newCourses = [
-        {
-          uuid: uuidv4(),
-          courseName: courseInput.current.value,
-        },
-      ];
-    }
+    const newCourses = [];
+    const parseCurrentCourses = JSON.parse(currentCourses);
+    newCourses.push(...parseCurrentCourses);
+    newCourses.push({ uuid: uuidv4(), courseName: courseInput.current.value });
     localStorage.setItem("Courses", JSON.stringify(newCourses));
     courseInput.current.value = "";
     setSuccess(true);

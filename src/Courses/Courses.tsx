@@ -1,4 +1,3 @@
-import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,16 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
+import Course from "./Course";
 
-type Course = {
+export type TCourse = {
   uuid: string;
   courseName: string;
+  handleCourseClick: (uuid: string) => void;
 };
 
 export default function Courses() {
-  const [courses, setCourses] = useState<Course[]>();
+  const [courses, setCourses] = useState<TCourse[]>();
   useEffect(() => {
     const storedCourses = localStorage.getItem("Courses");
     if (storedCourses) {
@@ -24,6 +24,9 @@ export default function Courses() {
       setCourses(parsedCourses);
     }
   }, []);
+  const handleCourseClick = (uuid: string) => {
+    console.log(uuid);
+  };
   return (
     <>
       <Typography variant="h3">Courses</Typography>
@@ -38,19 +41,12 @@ export default function Courses() {
           <TableBody>
             {courses?.map((course) => {
               return (
-                <TableRow
+                <Course
                   key={course.uuid}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {course.courseName}
-                  </TableCell>
-                  <TableCell>
-                    <IconButton aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                  uuid={course.uuid}
+                  courseName={course.courseName}
+                  handleCourseClick={handleCourseClick}
+                />
               );
             })}
           </TableBody>
