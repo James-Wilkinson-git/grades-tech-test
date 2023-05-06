@@ -41,31 +41,16 @@ export default function NewStudents() {
       setOfAge(false);
       //If we already have students in local storage we want to get those and add to them
       const students = localStorage.getItem("Students") || "";
-      let newStudents = [{}];
-      if (students) {
-        const parseStudents = JSON.parse(students);
-        newStudents = [
-          ...parseStudents,
-          {
-            uuid: uuidv4(),
-            firstName: firstNameInput.current.value,
-            familyName: familyNameInput.current.value,
-            email: emailInput.current.value,
-            dob: dob,
-          },
-        ];
-        //If we don't have students just add our first student
-      } else {
-        newStudents = [
-          {
-            uuid: uuidv4(),
-            firstName: firstNameInput.current.value,
-            familyName: familyNameInput.current.value,
-            email: emailInput.current.value,
-            dob: dob,
-          },
-        ];
-      }
+      const newStudents = [];
+      const parseStudents = JSON.parse(students);
+      newStudents.push(...parseStudents);
+      newStudents.push({
+        uuid: uuidv4(),
+        firstName: firstNameInput.current.value,
+        familyName: familyNameInput.current.value,
+        email: emailInput.current.value,
+        dob: dob,
+      });
       //Save The Data
       localStorage.setItem("Students", JSON.stringify(newStudents));
       //Reset the Form
