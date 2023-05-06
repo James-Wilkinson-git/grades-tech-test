@@ -28,8 +28,10 @@ export default function Courses() {
   }, []);
   //Delete courses we clicked on
   const handleCourseClick = (uuid: string) => {
-    const newCourses = courses?.filter((course) => course.uuid !== uuid);
-    setCourses(newCourses);
+    if (courses !== undefined) {
+      const newCourses = courses.filter((course) => course.uuid !== uuid);
+      setCourses(newCourses);
+    }
   };
   // Once courses is changed save it back to local storage
   useEffect(() => {
