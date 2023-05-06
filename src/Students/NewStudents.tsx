@@ -32,7 +32,7 @@ export default function NewStudents() {
     //Validate DOB is at Least 10
     const dob = dobInput.current.value;
     const age = intervalToDuration({
-      start: parseISO(dob as string),
+      start: parseISO(dob),
       end: new Date(),
     }).years;
     if ((age as number) < 10) {

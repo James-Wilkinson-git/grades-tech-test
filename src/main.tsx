@@ -13,6 +13,7 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import NewResults from "./Results/NewResults.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -23,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="students" element={<Students />} />
           <Route path="students/new" element={<NewStudents />} />
           <Route path="results" element={<Results />} />
-          <Route path="results/new" element={<Results />} />
+          <Route path="results/new" element={<NewResults />} />
           <Route path="courses" element={<Courses />} />
           <Route path="courses/new" element={<NewCourses />} />
         </Route>

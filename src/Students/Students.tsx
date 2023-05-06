@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 
-type Student = {
+export type TStudent = {
   uuid: string;
   firstName: string;
   familyName: string;
@@ -19,7 +19,7 @@ type Student = {
 };
 
 export default function Students() {
-  const [students, setStudents] = useState<Student[]>();
+  const [students, setStudents] = useState<TStudent[]>();
   //Get the students on load of the page from storage
   useEffect(() => {
     const getStudents = localStorage.getItem("Students") || "";
