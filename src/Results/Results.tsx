@@ -21,22 +21,6 @@ export type TResult = {
 
 export default function Results() {
   const [results, setResults] = useState<TResult[]>();
-  const [_courses, setCourses] = useState<TCourse[]>();
-  const [_students, setStudents] = useState<TStudent[]>();
-  useEffect(() => {
-    const storedCourses = localStorage.getItem("Courses");
-    if (storedCourses) {
-      const parsedCourses = JSON.parse(storedCourses);
-      setCourses(parsedCourses);
-    }
-  }, []);
-  useEffect(() => {
-    const storedStudents = localStorage.getItem("Students");
-    if (storedStudents) {
-      const parsedCourses = JSON.parse(storedStudents);
-      setStudents(parsedCourses);
-    }
-  }, []);
   useEffect(() => {
     const localResults = localStorage.getItem("Results") || "[]";
     const parsedResults = JSON.parse(localResults);
