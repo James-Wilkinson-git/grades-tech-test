@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import MenuItem from "@mui/material/MenuItem";
+import option from "@mui/material/option";
 import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { FormEvent, useEffect, useRef, useState } from "react";
@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import { TStudent } from "../Students/Students";
 import { v4 as uuidv4 } from "uuid";
 import Alert from "@mui/material/Alert";
+import NativeSelect from "@mui/material/NativeSelect";
 
 export default function NewResults() {
   //Reused logic from courses and students
@@ -55,7 +56,6 @@ export default function NewResults() {
       grade: gradeSelect.current.value,
     });
     localStorage.setItem("Results", JSON.stringify(newResults));
-    //TODO: refactor to use regular inputs so useRef() works, does not play well with MUI
     courseSelect.current.value = "";
     studentSelect.current.value = "";
     gradeSelect.current.value = "";
@@ -70,56 +70,50 @@ export default function NewResults() {
         <Box sx={{ paddingTop: "20px" }}>
           <Box sx={{ paddingTop: "20px" }}>
             <InputLabel id="demo-simple-select-label">Course</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
+            <NativeSelect
               id="demo-simple-select"
-              label="Course"
               inputRef={courseSelect}
               required
             >
               {courses?.map((course) => {
                 return (
-                  <MenuItem key={course.uuid} value={course.courseName}>
+                  <option key={course.uuid} value={course.courseName}>
                     {course.courseName}
-                  </MenuItem>
+                  </option>
                 );
               })}
-            </Select>
+            </NativeSelect>
           </Box>
           <Box sx={{ paddingTop: "20px" }}>
             <InputLabel id="demo-simple-select-label2">Student</InputLabel>
-            <Select
-              labelId="demo-simple-select-label2"
+            <NativeSelect
               id="demo-simple-select"
-              label="Course"
               inputRef={studentSelect}
               required
             >
               {students?.map((student) => {
                 return (
-                  <MenuItem key={student.uuid} value={student.firstName}>
+                  <option key={student.uuid} value={student.firstName}>
                     {student.firstName} {student.familyName}
-                  </MenuItem>
+                  </option>
                 );
               })}
-            </Select>
+            </NativeSelect>
           </Box>
           <Box sx={{ paddingTop: "20px" }}>
             <InputLabel id="demo-simple-select-label3">Grade</InputLabel>
-            <Select
-              labelId="demo-simple-select-label3"
+            <NativeSelect
               id="demo-simple-select"
-              label="Course"
               inputRef={gradeSelect}
               required
             >
-              <MenuItem value="A">A</MenuItem>
-              <MenuItem value="B">B</MenuItem>
-              <MenuItem value="C">C</MenuItem>
-              <MenuItem value="D">D</MenuItem>
-              <MenuItem value="E">E</MenuItem>
-              <MenuItem value="F">F</MenuItem>
-            </Select>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+            </NativeSelect>
           </Box>
           <Box sx={{ paddingTop: "20px" }}>
             <Button color="primary" variant="contained" type="submit">
