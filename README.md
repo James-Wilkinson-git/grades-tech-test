@@ -1,5 +1,9 @@
 # React Hooks & Array Functions Test
 
+# Live
+
+Visit this application at https://grades-tech-test.onrender.com/
+
 # Objective
 
 - to create a One Page App for Student Result Management System
