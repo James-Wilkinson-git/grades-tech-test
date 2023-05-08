@@ -31,6 +31,15 @@ export default function Courses() {
     if (courses !== undefined) {
       const newCourses = courses.filter((course) => course.uuid !== uuid);
       setCourses(newCourses);
+      //When we delete a course also delete all the results attached to it.
+      const course = courses.filter((course) => course.uuid === uuid);
+      const courseName = course[0].courseName;
+      const results = localStorage.getItem("Results") || "[]";
+      const parseResults = JSON.parse(results);
+      const newResults = parseResults.filter(
+        (result: any) => result.course !== courseName
+      );
+      localStorage.setItem("Results", JSON.stringify(newResults));
     }
   };
   // Once courses is changed save it back to local storage

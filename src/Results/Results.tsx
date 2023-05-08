@@ -42,13 +42,17 @@ export default function Results() {
     const parsedResults = JSON.parse(localResults);
     setResults(parsedResults);
   }, []);
-  //On page load delete any results for courses or students we don't have
+  //When results change save it to local storage
   useEffect(() => {
-    return;
-  }, []);
+    if (results !== undefined) {
+      localStorage.setItem("Results", JSON.stringify(results));
+    }
+  }, [results]);
   //Handle deleting of a result
   const handleResultDelete = (uuid: string) => {
     console.log(uuid);
+    const newResults = results?.filter((result) => result.uuid !== uuid);
+    setResults(newResults);
   };
   return (
     <>

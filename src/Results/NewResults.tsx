@@ -10,11 +10,13 @@ import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import { TStudent } from "../Students/Students";
 import { v4 as uuidv4 } from "uuid";
+import Alert from "@mui/material/Alert";
 
 export default function NewResults() {
   //Reused logic from courses and students
   const [courses, setCourses] = useState<TCourse[]>();
   const [students, setStudents] = useState<TStudent[]>();
+  const [success, setSuccess] = useState(false);
   useEffect(() => {
     const storedCourses = localStorage.getItem("Courses");
     if (storedCourses) {
@@ -53,9 +55,15 @@ export default function NewResults() {
       grade: gradeSelect.current.value,
     });
     localStorage.setItem("Results", JSON.stringify(newResults));
+    //TODO: refactor to use regular inputs so useRef() works, does not play well with MUI
+    courseSelect.current.value = "";
+    studentSelect.current.value = "";
+    gradeSelect.current.value = "";
+    setSuccess(true);
   };
   return (
     <>
+      {success && <Alert severity="success">Result Submitted</Alert>}
       <Typography variant="h3">New Results</Typography>
       <Divider />
       <form onSubmit={handleResultsSubmit}>
@@ -90,7 +98,7 @@ export default function NewResults() {
               {students?.map((student) => {
                 return (
                   <MenuItem key={student.uuid} value={student.firstName}>
-                    {student.firstName}
+                    {student.firstName} {student.familyName}
                   </MenuItem>
                 );
               })}

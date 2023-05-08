@@ -36,10 +36,19 @@ export default function Students() {
   }, [students]);
 
   const handleStudentDelete = (uuid: string) => {
-    console.log(uuid);
-    const newStudents = students?.filter((student) => student.uuid !== uuid);
-    console.log(newStudents);
-    setStudents(newStudents);
+    if (students !== undefined) {
+      const newStudents = students?.filter((student) => student.uuid !== uuid);
+      setStudents(newStudents);
+      //When we delete a student also delete all the results attached to it.
+      const student = students.filter((student) => student.uuid === uuid);
+      const studentName = student[0].firstName;
+      const results = localStorage.getItem("Results") || "[]";
+      const parseResults = JSON.parse(results);
+      const newResults = parseResults.filter(
+        (result: any) => result.student !== studentName
+      );
+      localStorage.setItem("Results", JSON.stringify(newResults));
+    }
   };
 
   return (
