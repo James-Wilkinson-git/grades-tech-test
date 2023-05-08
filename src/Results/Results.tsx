@@ -46,6 +46,10 @@ export default function Results() {
   useEffect(() => {
     return;
   }, []);
+  //Handle deleting of a result
+  const handleResultDelete = (uuid: string) => {
+    console.log(uuid);
+  };
   return (
     <>
       <Typography variant="h3">Students</Typography>
