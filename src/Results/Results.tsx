@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { TCourse } from "../Courses/Courses";
-import { TStudent } from "../Students/Students";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import TableHead from "@mui/material/TableHead";
