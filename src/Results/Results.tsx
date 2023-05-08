@@ -21,8 +21,8 @@ export type TResult = {
 
 export default function Results() {
   const [results, setResults] = useState<TResult[]>();
-  const [courses, setCourses] = useState<TCourse[]>();
-  const [students, setStudents] = useState<TStudent[]>();
+  const [_courses, setCourses] = useState<TCourse[]>();
+  const [_students, setStudents] = useState<TStudent[]>();
   useEffect(() => {
     const storedCourses = localStorage.getItem("Courses");
     if (storedCourses) {

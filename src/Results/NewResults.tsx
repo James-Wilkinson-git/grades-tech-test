@@ -1,12 +1,9 @@
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import option from "@mui/material/option";
-import Select from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { TCourse } from "../Courses/Courses";
 import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
 import { TStudent } from "../Students/Students";
 import { v4 as uuidv4 } from "uuid";
